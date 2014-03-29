@@ -12,7 +12,9 @@ This file was auto-generated!
 //==============================================================================
 MainContentComponent::MainContentComponent() : LINE_INIT(10), LINE_SPACING(30)
 {
-  setSize (400, 600);
+  setSize (400, getLine(12));
+
+  setLookAndFeel(&lookAndFeel_);
 
   // Read config file
   loadWaitBool_ = true;
@@ -133,7 +135,7 @@ MainContentComponent::MainContentComponent() : LINE_INIT(10), LINE_SPACING(30)
   botEnabledToggle_->setBounds      (x, getLine(8), w, h);
   botDifficultyCombo_->setBounds    (x, getLine(9), w, h);
 
-  launchServer_->setBounds          (10, getHeight() - 30, getWidth() - 20, 20);
+  launchServer_->setBounds          (10, getLine(11), getWidth() - 20, 20);
 
   // Add listeners
   srcdsSearchButton_->addListener(this);
@@ -164,7 +166,7 @@ MainContentComponent::~MainContentComponent()
 
 void MainContentComponent::paint (Graphics& g)
 {
-  g.fillAll (Colour (0xffeeddff));
+  g.fillAll (Colour (0xff777777));
 
   //g.setFont (Font (16.0f));
   g.setColour (Colours::black);
@@ -233,6 +235,8 @@ void MainContentComponent::comboBoxChanged(ComboBox* combo)
     if (mapSelectCombo_->getSelectedId() == (int) MapSelect::Diretide)
       modeSelectCombo_->setSelectedId((int) ModeSelect::Diretide, NotificationType::dontSendNotification);
     else if (mapSelectCombo_->getSelectedId() != (int) MapSelect::Winter && modeSelectCombo_->getSelectedId() == (int) ModeSelect::TheGreeviling)
+      modeSelectCombo_->setSelectedId((int) ModeSelect::AllPick, NotificationType::dontSendNotification);
+    else if (mapSelectCombo_->getSelectedId() != (int) MapSelect::Diretide && modeSelectCombo_->getSelectedId() == (int) ModeSelect::Diretide)
       modeSelectCombo_->setSelectedId((int) ModeSelect::AllPick, NotificationType::dontSendNotification);
   }
 }

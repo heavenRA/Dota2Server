@@ -101,6 +101,8 @@ private:
   const int LINE_SPACING;
   int getLine(int);
 
+  LookAndFeel_V3 lookAndFeel_;
+
   JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (MainContentComponent)
 };
 
