@@ -4,6 +4,9 @@
               bundleIdentifier="com.yourcompany.NewProject" includeBinaryInAppConfig="1"
               jucerVersion="3.1.0">
   <MAINGROUP id="yY9Ho3" name="Dota2Server">
+    <FILE id="cnV4re" name="dota2logo256.png" compile="0" resource="1"
+          file="dota2logo256.png"/>
+    <FILE id="AlGSvg" name="dota2logo32.png" compile="0" resource="1" file="dota2logo32.png"/>
     <GROUP id="{2B7CD7C4-474C-2D27-E5D3-14BE585F029D}" name="Source">
       <FILE id="J8PbGU" name="MainComponent.cpp" compile="1" resource="0"
             file="Source/MainComponent.cpp"/>
@@ -12,29 +15,29 @@
     </GROUP>
   </MAINGROUP>
   <EXPORTFORMATS>
-    <VS2010 targetFolder="Builds/VisualStudio2010">
+    <VS2012 targetFolder="Builds/VisualStudio2012" smallIcon="AlGSvg" bigIcon="cnV4re">
       <CONFIGURATIONS>
         <CONFIGURATION name="Debug" winWarningLevel="4" generateManifest="1" winArchitecture="32-bit"
-                       isDebug="1" optimisation="1" targetName="dota2server"/>
+                       isDebug="1" optimisation="1" targetName="dota2server" intermediatesPath=".\Debug\Intermediate"/>
         <CONFIGURATION name="Release" winWarningLevel="4" generateManifest="1" winArchitecture="32-bit"
-                       isDebug="0" optimisation="2" targetName="dota2server"/>
+                       isDebug="0" optimisation="2" targetName="Dota2Server" intermediatesPath=".\Release\Intermediate"/>
       </CONFIGURATIONS>
       <MODULEPATHS>
-        <MODULEPATH id="juce_core" path="../../../../../../juce/modules"/>
-        <MODULEPATH id="juce_events" path="../../../../../../juce/modules"/>
-        <MODULEPATH id="juce_graphics" path="../../../../../../juce/modules"/>
-        <MODULEPATH id="juce_data_structures" path="../../../../../../juce/modules"/>
-        <MODULEPATH id="juce_gui_basics" path="../../../../../../juce/modules"/>
-        <MODULEPATH id="juce_gui_extra" path="../../../../../../juce/modules"/>
-        <MODULEPATH id="juce_cryptography" path="../../../../../../juce/modules"/>
         <MODULEPATH id="juce_video" path="../../../../../../juce/modules"/>
         <MODULEPATH id="juce_opengl" path="../../../../../../juce/modules"/>
-        <MODULEPATH id="juce_audio_basics" path="../../../../../../juce/modules"/>
-        <MODULEPATH id="juce_audio_devices" path="../../../../../../juce/modules"/>
-        <MODULEPATH id="juce_audio_formats" path="../../../../../../juce/modules"/>
+        <MODULEPATH id="juce_gui_extra" path="../../../../../../juce/modules"/>
+        <MODULEPATH id="juce_gui_basics" path="../../../../../../juce/modules"/>
+        <MODULEPATH id="juce_graphics" path="../../../../../../juce/modules"/>
+        <MODULEPATH id="juce_events" path="../../../../../../juce/modules"/>
+        <MODULEPATH id="juce_data_structures" path="../../../../../../juce/modules"/>
+        <MODULEPATH id="juce_cryptography" path="../../../../../../juce/modules"/>
+        <MODULEPATH id="juce_core" path="../../../../../../juce/modules"/>
         <MODULEPATH id="juce_audio_processors" path="../../../../../../juce/modules"/>
+        <MODULEPATH id="juce_audio_formats" path="../../../../../../juce/modules"/>
+        <MODULEPATH id="juce_audio_devices" path="../../../../../../juce/modules"/>
+        <MODULEPATH id="juce_audio_basics" path="../../../../../../juce/modules"/>
       </MODULEPATHS>
-    </VS2010>
+    </VS2012>
   </EXPORTFORMATS>
   <MODULES>
     <MODULES id="juce_audio_basics" showAllCode="1" useLocalCopy="1"/>
