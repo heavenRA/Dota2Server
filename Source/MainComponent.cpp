@@ -28,7 +28,7 @@ MainContentComponent::MainContentComponent() : LINE_INIT(10), LINE_SPACING(30)
     FileInputStream input(inputFile);
 
     String str = input.readString();
-    srcds_ = File(str);
+    //srcds_ = File(str);
 
     loadWaitBool_ = input.readBool();
     loadWaitPlayerCount_ = input.readString();
@@ -37,6 +37,9 @@ MainContentComponent::MainContentComponent() : LINE_INIT(10), LINE_SPACING(30)
 
   // Default params
   srcdsParam_ = "-console -game dota";
+
+  // Search srcds
+  srcds_= File(File::getSpecialLocation(File::SpecialLocationType::currentApplicationFile).getParentDirectory().getFullPathName() + "\\serverfiles\\srcds.exe");
 
   // Components
   // Search Buttons
@@ -166,16 +169,13 @@ MainContentComponent::~MainContentComponent()
 
 void MainContentComponent::paint (Graphics& g)
 {
-  g.fillAll (Colour (0xff777777));
-
-  //g.setFont (Font (16.0f));
   g.setColour (Colours::black);
   g.drawText("srcds Path:",         10, getLine(0), 140, 20, Justification::centredLeft, false);
   g.drawText("Game Mode",           10, getLine(1), 140, 20, Justification::centredLeft, false);
   g.drawText("Map",                 10, getLine(2), 140, 20, Justification::centredLeft, false);
   g.drawText("Players Count",       10, getLine(5), 140, 20, Justification::centredLeft, false);
   g.drawText("Wait Time (seconds)", 10, getLine(6), 140, 20, Justification::centredLeft, false);
-  g.drawText("Bots Difficulty",     10, getLine(9), 140, 20, Justification::centredLeft, false);
+  g.drawText("Bot Difficulty",      10, getLine(9), 140, 20, Justification::centredLeft, false);
 }
 
 void MainContentComponent::resized()
@@ -200,7 +200,8 @@ void MainContentComponent::buttonClicked(Button* button)
   // Launch button
   else if (button == launchServer_)
   {
-    srcds_.startAsProcess(getSrcdsParam());
+    if (srcds_.existsAsFile())
+      srcds_.startAsProcess(getSrcdsParam());
   }
 }
 

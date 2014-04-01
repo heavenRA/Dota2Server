@@ -1,0 +1,5 @@
+"Metamod Plugin"
+{
+	"alias"		"d2fixups"
+	"file"		"addons/d2fixups/d2fixups"
+}

@@ -4,6 +4,65 @@
               bundleIdentifier="com.yourcompany.NewProject" includeBinaryInAppConfig="1"
               jucerVersion="3.1.0">
   <MAINGROUP id="yY9Ho3" name="Dota2Server">
+    <GROUP id="{778A037F-D995-ED88-514A-C2BB3FD04C61}" name="serverfiles">
+      <GROUP id="{3A947530-BB3F-F8F5-D526-04D0035B2F19}" name="addons">
+        <GROUP id="{DD68E80E-0453-83ED-570E-77FFEFCAD295}" name="d2fixups">
+          <FILE id="nirxsQ" name="d2fixups.dll" compile="0" resource="1" file="serverfiles/addons/d2fixups/d2fixups.dll"/>
+          <FILE id="CHqKAC" name="d2fixups.dylib" compile="0" resource="1" file="serverfiles/addons/d2fixups/d2fixups.dylib"/>
+          <FILE id="N5uVJ4" name="d2fixups.so" compile="0" resource="1" file="serverfiles/addons/d2fixups/d2fixups.so"/>
+          <FILE id="VauScN" name="readme.txt" compile="0" resource="1" file="serverfiles/addons/d2fixups/readme.txt"/>
+        </GROUP>
+        <GROUP id="{CFD19A92-5A39-6472-69D1-864AF112691C}" name="metamod">
+          <GROUP id="{1F815053-5E0C-7F4C-0F49-D9E28F654AF8}" name="bin">
+            <FILE id="c7UFpa" name="metamod.1.ep1.dll" compile="0" resource="1"
+                  file="serverfiles/addons/metamod/bin/metamod.1.ep1.dll"/>
+            <FILE id="obp0lI" name="metamod.2.bgt.dll" compile="0" resource="1"
+                  file="serverfiles/addons/metamod/bin/metamod.2.bgt.dll"/>
+            <FILE id="o4oXYh" name="metamod.2.blade.dll" compile="0" resource="1"
+                  file="serverfiles/addons/metamod/bin/metamod.2.blade.dll"/>
+            <FILE id="zX2rnp" name="metamod.2.contagion.dll" compile="0" resource="1"
+                  file="serverfiles/addons/metamod/bin/metamod.2.contagion.dll"/>
+            <FILE id="LyN0Hc" name="metamod.2.csgo.dll" compile="0" resource="1"
+                  file="serverfiles/addons/metamod/bin/metamod.2.csgo.dll"/>
+            <FILE id="r07AN9" name="metamod.2.css.dll" compile="0" resource="1"
+                  file="serverfiles/addons/metamod/bin/metamod.2.css.dll"/>
+            <FILE id="p4qipj" name="metamod.2.darkm.dll" compile="0" resource="1"
+                  file="serverfiles/addons/metamod/bin/metamod.2.darkm.dll"/>
+            <FILE id="QjiccG" name="metamod.2.dods.dll" compile="0" resource="1"
+                  file="serverfiles/addons/metamod/bin/metamod.2.dods.dll"/>
+            <FILE id="Qf1949" name="metamod.2.dota.dll" compile="0" resource="1"
+                  file="serverfiles/addons/metamod/bin/metamod.2.dota.dll"/>
+            <FILE id="WbCPRQ" name="metamod.2.ep2.dll" compile="0" resource="1"
+                  file="serverfiles/addons/metamod/bin/metamod.2.ep2.dll"/>
+            <FILE id="j1UB14" name="metamod.2.eye.dll" compile="0" resource="1"
+                  file="serverfiles/addons/metamod/bin/metamod.2.eye.dll"/>
+            <FILE id="AqacY4" name="metamod.2.hl2dm.dll" compile="0" resource="1"
+                  file="serverfiles/addons/metamod/bin/metamod.2.hl2dm.dll"/>
+            <FILE id="vkUxUP" name="metamod.2.insurgency.dll" compile="0" resource="1"
+                  file="serverfiles/addons/metamod/bin/metamod.2.insurgency.dll"/>
+            <FILE id="Or2kgk" name="metamod.2.l4d.dll" compile="0" resource="1"
+                  file="serverfiles/addons/metamod/bin/metamod.2.l4d.dll"/>
+            <FILE id="shl96y" name="metamod.2.l4d2.dll" compile="0" resource="1"
+                  file="serverfiles/addons/metamod/bin/metamod.2.l4d2.dll"/>
+            <FILE id="wSoHFw" name="metamod.2.nd.dll" compile="0" resource="1"
+                  file="serverfiles/addons/metamod/bin/metamod.2.nd.dll"/>
+            <FILE id="KmnX5p" name="metamod.2.sdk2013.dll" compile="0" resource="1"
+                  file="serverfiles/addons/metamod/bin/metamod.2.sdk2013.dll"/>
+            <FILE id="p9yT2W" name="metamod.2.swarm.dll" compile="0" resource="1"
+                  file="serverfiles/addons/metamod/bin/metamod.2.swarm.dll"/>
+            <FILE id="qfcOki" name="metamod.2.tf2.dll" compile="0" resource="1"
+                  file="serverfiles/addons/metamod/bin/metamod.2.tf2.dll"/>
+            <FILE id="EPIo9J" name="server.dll" compile="0" resource="1" file="serverfiles/addons/metamod/bin/server.dll"/>
+          </GROUP>
+          <FILE id="ki9Zk1" name="d2fixups.vdf" compile="0" resource="1" file="serverfiles/addons/metamod/d2fixups.vdf"/>
+          <FILE id="SoEwKy" name="metaplugins.ini" compile="0" resource="1" file="serverfiles/addons/metamod/metaplugins.ini"/>
+          <FILE id="MrCX9s" name="README.txt" compile="0" resource="1" file="serverfiles/addons/metamod/README.txt"/>
+        </GROUP>
+        <FILE id="ML5Umt" name="metamod.vdf" compile="0" resource="1" file="serverfiles/addons/metamod.vdf"/>
+      </GROUP>
+      <FILE id="bRfcLy" name="gameinfo.txt" compile="0" resource="1" file="serverfiles/gameinfo.txt"/>
+      <FILE id="V5gRTg" name="srcds.exe" compile="0" resource="1" file="serverfiles/srcds.exe"/>
+    </GROUP>
     <FILE id="cnV4re" name="dota2logo256.png" compile="0" resource="1"
           file="dota2logo256.png"/>
     <FILE id="AlGSvg" name="dota2logo32.png" compile="0" resource="1" file="dota2logo32.png"/>
