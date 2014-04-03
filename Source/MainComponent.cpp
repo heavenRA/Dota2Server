@@ -15,38 +15,37 @@ MainContentComponent::MainContentComponent() : LINE_INIT(10), LINE_SPACING(30)
   setSize (400, getLine(12));
 
   setLookAndFeel(&lookAndFeel_);
+  // Path
+  String path = File::getSpecialLocation(File::SpecialLocationType::currentApplicationFile).getParentDirectory().getFullPathName();
+
+  // Set server files location
+  serverFiles_ = File(path + "\\serverfiles\\");
+  backupFiles_ = File(path + "\\backupfiles\\");
 
   // Read config file
-  loadWaitBool_ = true;
-  loadWaitPlayerCount_ = "10";
-  loadWaitPlayerTime_ = "120";
+  bool loadWaitBool = true;
+  String loadWaitPlayerCount = "10";
+  String loadWaitPlayerTime = "120";
+  dotaPath_ = "";
 
-  String path = File::getSpecialLocation(File::SpecialLocationType::currentApplicationFile).getParentDirectory().getFullPathName() + "\\config.cfg";
-  File inputFile (path);
+  File inputFile(path + "\\config.cfg");
   if (inputFile.existsAsFile())
   {
     FileInputStream input(inputFile);
 
-    String str = input.readString();
-    //srcds_ = File(str);
+    dotaPath_ = input.readString();
 
-    loadWaitBool_ = input.readBool();
-    loadWaitPlayerCount_ = input.readString();
-    loadWaitPlayerTime_ = input.readString();
+    loadWaitBool = input.readBool();
+    loadWaitPlayerCount = input.readString();
+    loadWaitPlayerTime = input.readString();
   }
 
   // Default params
   srcdsParam_ = "-console -game dota";
 
-  // Search srcds
-  srcds_= File(File::getSpecialLocation(File::SpecialLocationType::currentApplicationFile).getParentDirectory().getFullPathName() + "\\serverfiles\\srcds.exe");
-
   // Components
   // Search Buttons
-  srcdsSearchButton_ = new TextButton("");
-
-  if (srcds_.existsAsFile())
-    srcdsSearchButton_->setButtonText(srcds_.getFullPathName());
+  dotaSearchButton_ = new TextButton(dotaPath_);
 
   // Mode ComboBox
   modeSelectCombo_ = new ComboBox("Mode Select");
@@ -80,19 +79,19 @@ MainContentComponent::MainContentComponent() : LINE_INIT(10), LINE_SPACING(30)
 
   // Wait for players to load
   waitPlayersToggle_ = new ToggleButton("Wait for players to load");
-  waitPlayersToggle_->setToggleState(loadWaitBool_, NotificationType::dontSendNotification);
+  waitPlayersToggle_->setToggleState(loadWaitBool, NotificationType::dontSendNotification);
 
   playerCountFilter_ = new TextEditor::LengthAndCharacterRestriction(2, "0123456789");
 
   waitPlayersCountBox_ = new TextEditor("Wait Players Count");
   waitPlayersCountBox_->setInputFilter(playerCountFilter_, false); 
-  waitPlayersCountBox_->setText(loadWaitPlayerCount_);
+  waitPlayersCountBox_->setText(loadWaitPlayerCount);
 
   waitTimeFilter_ = new TextEditor::LengthAndCharacterRestriction(0, "0123456789");
 
   waitPlayersTimeBox_ = new TextEditor("Wait Players Time");
   waitPlayersTimeBox_->setInputFilter(waitTimeFilter_, false); 
-  waitPlayersTimeBox_->setText(loadWaitPlayerTime_);
+  waitPlayersTimeBox_->setText(loadWaitPlayerTime);
 
   // Bots
   botEnabledToggle_ = new ToggleButton("Bot Enabled");
@@ -105,11 +104,16 @@ MainContentComponent::MainContentComponent() : LINE_INIT(10), LINE_SPACING(30)
   botDifficultyCombo_->addItem("Unfair",    (int) BotDifficulty::Unfair);
   botDifficultyCombo_->setSelectedId((int) BotDifficulty::Unfair, NotificationType::dontSendNotification);
 
+  //TODO Implement bots!
+  //     'Til there, no bots option
+  botEnabledToggle_->setEnabled(false);
+  botDifficultyCombo_->setEnabled(false);
+
   // Launch Button
   launchServer_ = new TextButton("Launch Server");
 
   // Add components
-  addAndMakeVisible(srcdsSearchButton_);
+  addAndMakeVisible(dotaSearchButton_);
 
   addAndMakeVisible(modeSelectCombo_);
   addAndMakeVisible(mapSelectCombo_);
@@ -126,7 +130,7 @@ MainContentComponent::MainContentComponent() : LINE_INIT(10), LINE_SPACING(30)
   int x = 150,
     w = 240,
     h = 20;
-  srcdsSearchButton_->setBounds     (x, getLine(0), w, h);
+  dotaSearchButton_->setBounds      (x, getLine(0), w, h);
 
   modeSelectCombo_->setBounds       (x, getLine(1), w, h);
   mapSelectCombo_->setBounds        (x, getLine(2), w, h);
@@ -141,7 +145,7 @@ MainContentComponent::MainContentComponent() : LINE_INIT(10), LINE_SPACING(30)
   launchServer_->setBounds          (10, getLine(11), getWidth() - 20, 20);
 
   // Add listeners
-  srcdsSearchButton_->addListener(this);
+  dotaSearchButton_->addListener(this);
   modeSelectCombo_->addListener(this);
   mapSelectCombo_->addListener(this);
   launchServer_->addListener(this);
@@ -150,15 +154,21 @@ MainContentComponent::MainContentComponent() : LINE_INIT(10), LINE_SPACING(30)
 MainContentComponent::~MainContentComponent()
 {
   // Save config
-  if (srcds_.existsAsFile())
+  if (dotaPath_.isNotEmpty())
   {
     String path = File::getSpecialLocation(File::SpecialLocationType::currentApplicationFile).getParentDirectory().getFullPathName() + "\\config.cfg";
     File outputFile (path);
+    outputFile.deleteFile();
+
     FileOutputStream output(outputFile);
-    output.writeString(srcds_.getFullPathName());
+
+    output.writeString(dotaPath_);
     output.writeBool(waitPlayersToggle_->getToggleState());
     output.writeString(waitPlayersCountBox_->getText());
     output.writeString(waitPlayersTimeBox_->getText());
+
+    // Copy backup'd data back
+    backupFiles_.copyDirectoryTo(dotaPath_);
   }
 
   deleteAllChildren();
@@ -170,7 +180,7 @@ MainContentComponent::~MainContentComponent()
 void MainContentComponent::paint (Graphics& g)
 {
   g.setColour (Colours::black);
-  g.drawText("srcds Path:",         10, getLine(0), 140, 20, Justification::centredLeft, false);
+  g.drawText("dota.exe Path:",      10, getLine(0), 140, 20, Justification::centredLeft, false);
   g.drawText("Game Mode",           10, getLine(1), 140, 20, Justification::centredLeft, false);
   g.drawText("Map",                 10, getLine(2), 140, 20, Justification::centredLeft, false);
   g.drawText("Players Count",       10, getLine(5), 140, 20, Justification::centredLeft, false);
@@ -184,24 +194,29 @@ void MainContentComponent::resized()
 void MainContentComponent::buttonClicked(Button* button)
 {
   // Search button
-  if (button == srcdsSearchButton_)
+  if (button == dotaSearchButton_)
   {
-    FileChooser srcdsChooser("Select srcds.exe",
-      File::nonexistent,
-      "srcds.exe");
-
-    if (srcdsChooser.browseForFileToOpen())
+    FileChooser dotaChooser("Select dota.exe", File::nonexistent, "dota.exe");
+    
+    if (dotaChooser.browseForFileToOpen())
     {
-      srcds_ = srcdsChooser.getResult();
-      srcdsSearchButton_->setButtonText(srcds_.getFullPathName());
+      dotaPath_ = dotaChooser.getResult().getParentDirectory().getFullPathName();
+      dotaSearchButton_->setButtonText(dotaPath_);
     }
   }
 
   // Launch button
   else if (button == launchServer_)
   {
-    if (srcds_.existsAsFile())
-      srcds_.startAsProcess(getSrcdsParam());
+    if (dotaPath_.isNotEmpty())
+    {
+      // Copy files to dota 2 folder
+      serverFiles_.copyDirectoryTo(dotaPath_);
+
+      File srcds = File(dotaPath_ + "\\srcds.exe");
+      if (srcds.existsAsFile())
+        srcds.startAsProcess(getSrcdsParam());
+    }
   }
 }
 

@@ -67,17 +67,16 @@ private:
     Unfair
   };
 
-  // Loading
-  bool loadWaitBool_;
-  String loadWaitPlayerCount_,
-    loadWaitPlayerTime_;
-
   // Files and params
-  File srcds_;
   String srcdsParam_;
 
+  String dotaPath_;
+
+  File serverFiles_;
+  File backupFiles_;
+
   // GUI Components
-  TextButton* srcdsSearchButton_;
+  TextButton* dotaSearchButton_;
 
   ComboBox* modeSelectCombo_;
   ComboBox* mapSelectCombo_;
