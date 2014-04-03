@@ -8,6 +8,7 @@ Uses Alien Swarm Dedicated Server and Dota2Fixups with SourceMod.
 - Juce Toolkit
 - Introjucer (comes with Juce Toolkit)
 
-- Add a post-build/content files to deploy serverfiles folder
+- Add a post-build/content files to deploy serverfiles folder and backupfiles folder
   If using Visual Studio, you should add a post-build script as follows:
     xcopy /Y /S "$(SolutionDir)\..\..\serverfiles" "$(TargetDir)\serverfiles\"
+    xcopy /Y /S "$(SolutionDir)\..\..\backupfiles" "$(TargetDir)\backupfiles\"
